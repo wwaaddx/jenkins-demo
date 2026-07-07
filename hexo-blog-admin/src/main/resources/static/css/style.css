@@ -1,0 +1,235 @@
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --danger: #dc2626;
+    --danger-hover: #b91c1c;
+    --bg: #f3f4f6;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+button.secondary {
+    background: #f3f4f6;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+button.secondary:hover {
+    background: #e5e7eb;
+}
+
+button.danger {
+    background: var(--danger);
+}
+
+button.danger:hover {
+    background: var(--danger-hover);
+}
+
+.body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 280px;
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+#search {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.post-list li {
+    padding: 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+}
+
+.post-list li:hover,
+.post-list li.active {
+    background: #eff6ff;
+}
+
+.post-list .title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-list .meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.editor {
+    flex: 1;
+    padding: 20px 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-row {
+    display: flex;
+    gap: 16px;
+}
+
+.field-row .field {
+    flex: 1;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+input[type="text"],
+textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    background: var(--card);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.editor-area {
+    flex: 1;
+    min-height: 240px;
+}
+
+textarea {
+    resize: vertical;
+    flex: 1;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    line-height: 1.5;
+}
+
+.preview-area {
+    flex: 1;
+    min-height: 200px;
+}
+
+.preview {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    background: var(--card);
+    overflow-y: auto;
+    min-height: 200px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.status {
+    font-size: 0.85rem;
+    min-height: 1.2rem;
+    color: var(--muted);
+}
+
+.status.success {
+    color: #16a34a;
+}
+
+.status.error {
+    color: var(--danger);
+}

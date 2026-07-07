@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexo 博客管理后台</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <h1>Hexo 博客管理</h1>
+            <div class="actions">
+                <button id="btn-new">新建文章</button>
+                <button id="btn-upload">上传图片</button>
+                <button id="btn-generate">生成站点</button>
+                <button id="btn-clean">清理缓存</button>
+            </div>
+        </header>
+        <div class="body">
+            <aside class="sidebar">
+                <input type="text" id="search" placeholder="搜索文章...">
+                <ul id="post-list" class="post-list"></ul>
+            </aside>
+            <main class="editor">
+                <div class="field">
+                    <label>标题</label>
+                    <input type="text" id="title" placeholder="输入文章标题">
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>分类（逗号分隔）</label>
+                        <input type="text" id="categories" placeholder="例如：技术, Java">
+                    </div>
+                    <div class="field">
+                        <label>标签（逗号分隔）</label>
+                        <input type="text" id="tags" placeholder="例如：Spring Boot, Hexo">
+                    </div>
+                </div>
+                <div class="field editor-area">
+                    <label>正文（Markdown）</label>
+                    <textarea id="content" placeholder="在此输入 Markdown 正文..."></textarea>
+                </div>
+                <div class="field preview-area hidden">
+                    <label>预览</label>
+                    <div id="preview" class="preview"></div>
+                </div>
+                <div class="editor-actions">
+                    <button id="btn-preview" class="secondary">预览</button>
+                    <button id="btn-save">保存</button>
+                    <button id="btn-delete" class="danger">删除</button>
+                </div>
+                <div id="status" class="status"></div>
+            </main>
+        </div>
+    </div>
+    <input type="file" id="file-input" accept="image/*" style="display:none">
+    <script src="/js/app.js"></script>
+</body>
+</html>
