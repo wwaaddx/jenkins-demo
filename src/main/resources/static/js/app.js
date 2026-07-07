@@ -1,4 +1,4 @@
-const API = '/api';
+const API = 'api';
 
 let currentSlug = null;
 let allPosts = [];

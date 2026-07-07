@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -188,6 +189,10 @@ public class HexoService {
         try {
             File file = getFile(post.getSlug());
             Files.writeString(file.toPath(), sb.toString(), StandardCharsets.UTF_8);
+        } catch (AccessDeniedException e) {
+            log.error("无写入权限: {}", getFile(post.getSlug()).getAbsolutePath());
+            throw new RuntimeException("无写入权限，请检查目录权限: " + getFile(post.getSlug()).getAbsolutePath()
+                    + "（运行 jar 的用户需要对该目录有写权限）", e);
         } catch (IOException e) {
             throw new RuntimeException("保存文章失败: " + post.getSlug(), e);
         }
