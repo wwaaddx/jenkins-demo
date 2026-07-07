@@ -176,9 +176,14 @@ async function runHexoCommand(command) {
     try {
         const res = await fetch(`${API}/posts/${command}`, { method: 'POST' });
         const data = await res.json();
-        if (!res.ok || parseInt(data.exitCode) !== 0) {
+        if (!res.ok) {
+            const msg = data.error || data.output || `HTTP ${res.status}`;
+            console.error('hexo command failed:', data);
+            throw new Error(msg);
+        }
+        if (parseInt(data.exitCode) !== 0) {
             console.error(data.output);
-            throw new Error(data.output || '执行失败');
+            throw new Error(data.output || `exitCode=${data.exitCode}`);
         }
         showStatus(`hexo ${command} 执行成功`);
     } catch (err) {

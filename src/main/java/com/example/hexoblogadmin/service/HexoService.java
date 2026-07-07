@@ -5,6 +5,8 @@ import com.example.hexoblogadmin.model.PostCreateRequest;
 import com.example.hexoblogadmin.model.PostUpdateRequest;
 import com.example.hexoblogadmin.util.FrontMatterParser;
 import com.example.hexoblogadmin.util.SlugUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,8 @@ import java.util.*;
 
 @Service
 public class HexoService {
+
+    private static final Logger log = LoggerFactory.getLogger(HexoService.class);
 
     @Value("${blog.work-dir}")
     private String workDir;
@@ -105,6 +109,7 @@ public class HexoService {
     }
 
     public Map<String, String> runHexo(String command) throws Exception {
+        log.info("执行 hexo {} (workDir={}, command={})", command, workDir, hexoCommand);
         ProcessBuilder pb = new ProcessBuilder(hexoCommand, command);
         pb.directory(new File(workDir));
         pb.redirectErrorStream(true);
@@ -112,6 +117,12 @@ public class HexoService {
         Process process = pb.start();
         String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
         int exitCode = process.waitFor();
+
+        if (exitCode != 0) {
+            log.error("hexo {} 执行失败, exitCode={}\n{}", command, exitCode, output);
+        } else {
+            log.info("hexo {} 执行成功", command);
+        }
 
         Map<String, String> result = new LinkedHashMap<>();
         result.put("command", command);
